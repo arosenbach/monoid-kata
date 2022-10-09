@@ -42,7 +42,14 @@ class RuleTest {
         @Test
         @DisplayName("associativity: (x • y) • z ≡ x • (y • z)")
         void associativity() {
-            assertEquals("Associativity", "FIX ME!");
+            final Rule rule1 = cabs -> cabs.stream().filter(cab -> cab.getSeatsAvailable() == 1).collect(toList());
+            final Rule rule2 = cabs -> cabs.stream().filter(cab -> cab.getType().equals(Cab.Type.POOL)).collect(toList());
+            final Rule rule3 = cabs -> cabs
+                    .stream()
+                    .filter(c -> c.getFinalDestination().equals(CARREFOUR_MEYLAN) && c.getCurrentLocation().equals(MUSEE_GRENOBLE))
+                    .collect(toList());
+            assertEquals((rule1.combine(rule2)).combine(rule3).apply(List.of(new Cab(Cab.Type.POOL, 1, 3, CARREFOUR_MEYLAN, MUSEE_GRENOBLE))),
+                    rule1.combine((rule2.combine(rule3))).apply(List.of(new Cab(Cab.Type.POOL, 1, 3, CARREFOUR_MEYLAN, MUSEE_GRENOBLE))));
         }
     }
 }

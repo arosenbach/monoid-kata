@@ -33,7 +33,8 @@ public class RulePropertyTest {
                        @ForAll("rule") Rule rule2,
                        @ForAll("rule") Rule rule3,
                        @ForAll("cabs") List<Cab> cabs) {
-        assertEquals("Associativity", "FIX ME!");
+        assertEquals((rule1.combine(rule2)).combine(rule3).apply(cabs),
+                rule1.combine((rule2.combine(rule3))).apply(cabs));
     }
 
     @Property
