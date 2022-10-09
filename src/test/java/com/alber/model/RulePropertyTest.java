@@ -10,6 +10,7 @@ import net.jqwik.api.Property;
 import net.jqwik.api.Provide;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,7 +43,10 @@ public class RulePropertyTest {
                           @ForAll("rule") Rule rule2,
                           @ForAll("rule") Rule rule3,
                           @ForAll("cabs") List<Cab> cabs) {
-        assertEquals("Reduce-able", "FIX ME!");
+        assertEquals((rule1.combine(rule2)).combine(rule3).apply(cabs),
+                Stream.of(rule1, rule2, rule3)
+                        .reduce(Rule.identity(), Rule::combine)
+                        .apply(cabs));
     }
 
 
