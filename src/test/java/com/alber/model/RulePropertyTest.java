@@ -24,7 +24,8 @@ public class RulePropertyTest {
 
     @Property
     void left_identity(@ForAll("rule") Rule rule, @ForAll("cabs") List<Cab> cabs) {
-        assertEquals("Left identity", "FIX ME!");
+        assertEquals(rule.apply(cabs),
+                Rule.identity().combine(rule).apply(cabs));
     }
 
     @Property

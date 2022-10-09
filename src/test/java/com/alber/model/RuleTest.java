@@ -33,7 +33,9 @@ class RuleTest {
         @Test
         @DisplayName("left identity: empty • x ≡ x")
         void leftIdentity() {
-            assertEquals("Left identity", "FIX ME!");
+            final Rule rule1 = cabs -> cabs.stream().filter(cab -> cab.getSeatsAvailable() == 1).collect(toList());
+            final Rule rule2 = Rule.identity().combine(rule1);
+            assertEquals(rule1.apply(List.of(new Cab(Cab.Type.POOL, 1, 3, CARREFOUR_MEYLAN, MUSEE_GRENOBLE))), rule2.apply(List.of(new Cab(Cab.Type.POOL, 1, 3, CARREFOUR_MEYLAN, MUSEE_GRENOBLE))));
         }
 
         //
