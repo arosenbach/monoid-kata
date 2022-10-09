@@ -18,7 +18,8 @@ public class RulePropertyTest {
 
     @Property
     void right_identity(@ForAll("rule") Rule rule, @ForAll("cabs") List<Cab> cabs) {
-        assertEquals("Right identity", "FIX ME!");
+        assertEquals(rule.apply(cabs),
+                rule.combine(Rule.identity()).apply(cabs));
     }
 
     @Property

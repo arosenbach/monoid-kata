@@ -1,5 +1,7 @@
 package com.alber.model;
 
+import java.util.Objects;
+
 public class Cab {
 
     public boolean isEmpty() {
@@ -38,5 +40,18 @@ public class Cab {
 
     public int getSeatsAvailable() {
         return this.seatsAvailable;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Cab cab = (Cab) o;
+        return seatsAvailable == cab.seatsAvailable && totalSeats == cab.totalSeats && type == cab.type && Objects.equals(currentLocation, cab.currentLocation) && Objects.equals(finalDestination, cab.finalDestination);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, seatsAvailable, totalSeats, currentLocation, finalDestination);
     }
 }
