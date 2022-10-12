@@ -221,7 +221,7 @@ class AlberServiceTest {
 
 
         @Test
-        @DisplayName("it returns empty list when there's no POOL cabs")
+        @DisplayName("it returns empty list when there's no BASIC cabs")
         void getCabs_no_matching_types() {
             // Arrange
             final Cab aCab = new Cab(Cab.Type.PREMIUM, 3, 3, CARREFOUR_MEYLAN, MUSEE_GRENOBLE);
